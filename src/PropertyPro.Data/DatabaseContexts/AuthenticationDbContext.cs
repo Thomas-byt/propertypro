@@ -1,8 +1,15 @@
-namespace PropertyPro.Data.DatabaseContexts.AuthenticationDbContext{
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-    public class AuthenticationDbContext
-}
-
+namespace PropertyPro.Data.DatabaseContexts.AuthenticationDbContext
 {
-    
+
+
+
+    public class AuthenticationDbContext : IdentityDbContext
+    {
+        
+    }
+
 }
+
+ 
