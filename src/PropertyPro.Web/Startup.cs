@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PropertyPro.Data.DatabaseContexts.ApplicationDbContext;
+using PropertyPro.Data.DatabaseContexts.AuthenticationDbContext;
 
 namespace PropertyPro.Web
 {
@@ -24,7 +27,19 @@ namespace PropertyPro.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<AuthenticationDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection")));
+                options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"),
+                
+                sqlServerOptions => {
+                    sqlServerOptions.MigrationsAssembly("PropertyPro.Data");
+                }));
+            
+            services.AddDbContextPool<ApplicationDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationDb"),
+                
+                sqlServerOptions => {
+                    sqlServerOptions.MigrationsAssembly("PropertyPro.Data");
+        }));
+            
             services.AddControllersWithViews();
         }
 
