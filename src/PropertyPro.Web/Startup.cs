@@ -30,14 +30,14 @@ namespace PropertyPro.Web
                 options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"),
                 
                 sqlServerOptions => {
-                    sqlServerOptions.MigrationsAssembly("PropertyPro.Data");
+                    sqlServerOptions.MigrationsAssembly("Propertypro.Data");
                 }));
             
             services.AddDbContextPool<ApplicationDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationDb"),
+                options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
                 
                 sqlServerOptions => {
-                    sqlServerOptions.MigrationsAssembly("PropertyPro.Data");
+                    sqlServerOptions.MigrationsAssembly("Propertypro.Data");
         }));
             
             services.AddControllersWithViews();
